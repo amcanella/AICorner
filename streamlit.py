@@ -101,9 +101,8 @@ with tab3:
     st.title(" Chatbot")
     st.write("Welcome to the chatbot! 🤖")
     
-    OPENAI_API_KEY = "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"
     # Read OpenAI API key
-    client = OpenAI(api_key=OPENAI_API_KEY) #st.secrets["OPENAI_API_KEY"])
+    client = '' #OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
     
     # Set a default model
     if "openai_model" not in st.session_state:
