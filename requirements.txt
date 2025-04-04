@@ -3,4 +3,3 @@ kagglehub
 torch
 openai
 tensorflow
-trial
