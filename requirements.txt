@@ -1,1 +1,7 @@
 matplotlib
+transformers
+kagglehub
+torch
+openai
+tensorflow
+trial

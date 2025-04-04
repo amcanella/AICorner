@@ -152,7 +152,7 @@ with tab4:
     st.title("Recognizer 👁️".upper())
     st.write("Welcome! Please, choose a JPG image of an animal or a vegetable.")
     
-    image_file = st.file_uploader("Upload a jpg image", type=['jpg', 'jpeg', 'png'])
+    image_file = st.file_uploader("Upload a jpg image", type=['jpg', 'jpeg'])
 
     if image_file is not None:
         
