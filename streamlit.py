@@ -9,7 +9,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image 
-from transformers import pipeline, AutoFeatureExtractor, ResNetForImageClassification   
+from transformers import pipeline, AutoFeatureExtractor, ResNetForImageClassification, AutoImageProcessor #(newer)
 import kagglehub 
 import random
 import time
@@ -162,7 +162,7 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
-            feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
+            feature_extractor = AutoImageProcessor.from_pretrained("microsoft/resnet-152")
             model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
 
             #Function that predicts the label of the image
