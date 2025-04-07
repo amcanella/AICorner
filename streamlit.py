@@ -8,22 +8,20 @@ Created on Mon Mar 10 20:47:31 2025
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from PIL import Image
-from transformers import pipeline
+from PIL import Image 
+from transformers import pipeline, AutoFeatureExtractor, ResNetForImageClassification   
 import kagglehub 
 import random
 import time
 import torch
 
 from openai import OpenAI, RateLimitError   
-
 from tensorflow import keras
-from tensorflow.keras.models import load_model
 
 import os
 
-import trial
-from PIL import Image as PILImage
+#import trial
+#from IPython.display import Image
 
 # Set the title of your app
 st.title('Welcome to the AI corner!🤖')
@@ -164,8 +162,24 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
+            feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
+            model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
+
+            #Function that predicts the label of the image
+            def predictor(image):
+
+                inputs = feature_extractor(image, return_tensors="pt")
+
+                with torch.no_grad():
+                    logits = model(**inputs).logits
+
+                # model predicts one of the 1000 ImageNet classes
+                predicted_label = logits.argmax(-1).item()
+                
+                return predicted_label
+            
             # Perform prediction using the function from trial.py
-            st.title(f"YOUR IMAGE IS A:  {trial.model.config.id2label[trial.predictor(image)].upper()}")
+            st.title(f"YOUR IMAGE IS A:  {model.config.id2label[predictor(image)].upper()}")
         
         except ValueError as e:
             st.write(f"Error: your image must be a .jpg , but it is a {image.format}.".upper())
