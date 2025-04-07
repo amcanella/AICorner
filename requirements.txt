@@ -1,5 +1,7 @@
+streamlit
 matplotlib
 transformers
+Pillow
 kagglehub
 torch
 openai
