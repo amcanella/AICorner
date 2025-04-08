@@ -162,16 +162,16 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
-            feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
-            model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
+            feature_extractor = AutoFeatureExtractor.from_pretrained("resnet_bicho", local_files_only = True) #microsoft/resnet-152")
+            model = ResNetForImageClassification.from_pretrained("resnet_bicho", local_files_only = True) #microsoft/resnet-152")
 
             #Function that predicts the label of the image
             def predictor(image):
 
-                inputs = feature_extractor(image, return_tensors="pt")
+                inputs = feature_extractor(image, return_tensors="pt") #return pytorch tensor format
 
                 with torch.no_grad():
-                    logits = model(**inputs).logits
+                    logits = model(**inputs).logits #unpack the inputs dictionary
 
                 # model predicts one of the 1000 ImageNet classes
                 predicted_label = logits.argmax(-1).item()
