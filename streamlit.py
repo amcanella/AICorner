@@ -19,6 +19,7 @@ from openai import OpenAI, RateLimitError
 from tensorflow import keras
 
 import os
+from huggingface_hub import login
 
 #import trial
 #from IPython.display import Image
@@ -162,8 +163,10 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
-            feature_extractor = AutoFeatureExtractor.from_pretrained("resnet_bicho", local_files_only = True) #microsoft/resnet-152")
-            model = ResNetForImageClassification.from_pretrained("resnet_bicho", local_files_only = True) #microsoft/resnet-152")
+            login('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') #login to Hugging Face account
+            
+            feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
+            model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
 
             #Function that predicts the label of the image
             def predictor(image):
