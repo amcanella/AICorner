@@ -163,7 +163,7 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
-            login('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') #login to Hugging Face account
+            #login() to Hugging Face account
             
             feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
             model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
