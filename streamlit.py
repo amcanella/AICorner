@@ -28,10 +28,10 @@ from huggingface_hub import login
 st.title('Welcome to the AI corner!🤖')
 
 # Main title for your portfolio
-st.title('My python projects 🧑‍💻 ')
+st.header('Every tab does a different task 🧑‍💻 ')
 
 # Create tabs
-tab1, tab2, tab3, tab4 = st.tabs(["📁 My First Streamlit App", "🖼️ Image Recognition Model", "Chatbot 🤖", "👁️ Recognizer"])
+tab1, tab2, tab3, tab4 = st.tabs(["📁 Data analysis", "🖼️ Finger Recognition ", "Chatbot 🤖", "👁️ Recognizer"])
 
 with tab1:
 
@@ -141,9 +141,9 @@ with tab3:
             #st.error(f"An error occurred: {e}")
             with st.chat_message("assistant"):
                 st.markdown("Oops! Sorry, I can't talk now. The max number of tokens has been excedeed. Speak to Alonso.")
-        '''except RateLimitError as e:
-                if e.code == 'insufficient_quota':
-                  st.error("You have exceeded your current quota. Please check your plan and billing details.")'''
+        #except RateLimitError as e:
+        #       if e.code == 'insufficient_quota':
+        #          st.error("You have exceeded your current quota. Please check your plan and billing details.")'''
 
 
 with tab4:
@@ -163,7 +163,7 @@ with tab4:
             st.write(f"Image mode: {image.mode}")
             st.image(image, caption='Uploaded Image.', use_container_width=True)
             
-            #login() to Hugging Face account
+            login(st.secrets["hugging_face"]) #login() to Hugging Face account
             
             feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/resnet-152")
             model = ResNetForImageClassification.from_pretrained("microsoft/resnet-152")
